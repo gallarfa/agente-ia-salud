@@ -8,18 +8,18 @@ Este proyecto consiste en un agente desarrollado en Python que clasifica consult
 - Media
 - Baja
 
-Actualmente, el sistema funciona mediante reglas simples basadas en palabras clave detectadas dentro del motivo de consulta ingresado por el usuario.
+Inicialmente, el sistema funcionaba mediante reglas simples basadas en palabras clave.
 
 Ejemplo:
 
-- "suicidio"
-- "autolesión"
-- "ansiedad"
-- "estrés"
+- suicidio  
+- autolesión  
+- ansiedad  
+- estrés  
 
-En futuras versiones se planea integrar modelos de inteligencia artificial local mediante **Ollama**, lo que aumentará la capacidad de análisis del agente.
+Posteriormente el proyecto evolucionó incorporando **Ollama** ejecutando localmente el modelo **Llama 3.2**, permitiendo analizar lenguaje natural de manera más inteligente sin depender de servicios externos.
 
-Debido a que trabaja con información sensible relacionada con la salud mental, es importante analizar los aspectos éticos del sistema.
+Esto mejora significativamente tanto la capacidad técnica como los aspectos éticos relacionados con privacidad.
 
 ---
 
@@ -27,152 +27,169 @@ Debido a que trabaja con información sensible relacionada con la salud mental, 
 
 ## Riesgo de sesgos
 
-El agente actual puede presentar sesgos porque utiliza palabras clave predefinidas por los desarrolladores.
+Todo sistema de inteligencia artificial puede presentar sesgos.
 
-Por ejemplo:
+En la primera versión basada en palabras clave:
 
-- Puede detectar correctamente la palabra "suicidio"
-- Pero podría no detectar expresiones similares como:
-  - "no quiero seguir viviendo"
-  - "quiero desaparecer"
-  - "no tengo razones para vivir"
+- Solo detectaba términos exactos
+- Podía ignorar expresiones indirectas
+- Tenía limitaciones lingüísticas
 
-Esto puede generar errores de clasificación debido a limitaciones en el vocabulario utilizado.
+Ejemplo:
 
-También pueden existir sesgos culturales o lingüísticos:
+"No quiero seguir viviendo"
 
-- Diferentes regiones utilizan distintas expresiones
-- Algunos pacientes pueden describir su situación de manera indirecta
+Si la palabra "suicidio" no aparecía explícitamente, el sistema podía fallar.
 
 ---
 
-## Cómo mitigamos los sesgos
+## Con Ollama
 
-Para reducir estos problemas se propone:
+Al incorporar **:contentReference[oaicite:2]{index=2}** y el modelo :contentReference[oaicite:3]{index=3}:
 
-- Ampliar constantemente la base de palabras clave
-- Validar el sistema con profesionales de salud mental
-- Realizar pruebas con distintos tipos de lenguaje
-- Evitar depender únicamente de una sola palabra
-- Incorporar supervisión humana
+- El agente comprende mejor el contexto
+- Detecta frases indirectas
+- Interpreta lenguaje natural
+- Reduce errores por coincidencia exacta de palabras
 
-Cuando se implemente Ollama:
+Ejemplo:
 
-- Entrenar/promptear cuidadosamente al modelo
-- Revisar resultados periódicamente
-- Detectar posibles patrones discriminatorios
+- "Estoy cansado de vivir"
+- "No encuentro sentido a nada"
+
+El modelo puede detectar señales de riesgo aunque no aparezcan palabras exactas.
+
+---
+
+## Mitigación de sesgos
+
+Para reducir riesgos:
+
+- Supervisión humana
+- Evaluación constante
+- Revisión de resultados
+- Pruebas con diferentes perfiles de pacientes
+- Mejora continua del sistema
 
 ---
 
 # 2. Alucinaciones o errores de clasificación
 
-## Situación actual
+Los modelos LLM pueden interpretar incorrectamente ciertos mensajes.
 
-El sistema actual no utiliza IA generativa, por lo tanto no produce alucinaciones tradicionales como inventar información.
+Aunque el sistema mejoró con Ollama, todavía existe riesgo de:
 
-Sin embargo, sí puede cometer errores de clasificación:
+- Clasificación errónea
+- Falsos positivos
+- Falsos negativos
 
-Ejemplo:
-
-Un paciente escribe:
-
-"Estoy cansado de vivir"
-
-Si esa frase no coincide con palabras clave críticas, el sistema podría clasificar incorrectamente como prioridad media o baja.
+Esto podría afectar la atención médica.
 
 ---
 
-## Riesgos
+## Mitigación
 
-Una clasificación incorrecta puede provocar:
-
-- Retraso en atención urgente
-- Riesgo para el paciente
-- Mala asignación de recursos
-- Decisiones equivocadas
-
----
-
-## Solución propuesta
-
-El agente debe funcionar únicamente como herramienta de apoyo.
+El sistema debe funcionar únicamente como herramienta de apoyo.
 
 La decisión final debe ser tomada por:
 
-- Psicólogos
-- Psiquiatras
-- Médicos
-- Personal capacitado
+- Psicólogos  
+- Psiquiatras  
+- Médicos  
+- Profesionales capacitados  
 
-En futuras versiones con Ollama:
-
-- Implementar revisión humana obligatoria
-- Registrar decisiones del sistema
-- Permitir auditorías
+Nunca debe reemplazar el juicio humano.
 
 ---
 
 # 3. Privacidad de datos
 
-La información de pacientes de salud mental es altamente sensible.
+La información de salud mental es extremadamente sensible.
 
 Ejemplos:
 
 - Diagnósticos
-- Síntomas
-- Historial emocional
-- Riesgos de autolesión
+- Crisis emocionales
+- Pensamientos suicidas
+- Historial clínico
 
 ---
 
-## Medidas de protección
+## Uso de Ollama local
 
-Para proteger los datos se recomienda:
+Una gran ventaja ética del proyecto es que utiliza **:contentReference[oaicite:4]{index=4}** de manera local.
 
-- No almacenar datos innecesarios
-- Encriptar bases de datos
-- Restringir accesos
-- Utilizar autenticación segura
-- Anonymizar información cuando sea posible
-- Cumplir normativas de protección de datos
+Esto significa que:
 
-Si se utiliza Ollama local:
+✅ Los datos de pacientes **nunca salen de la computadora o servidor local**  
 
-Esto mejora la privacidad porque los datos pueden procesarse en servidores locales sin enviarlos a servicios externos.
+✅ No se envían datos a APIs externas  
+
+✅ No se comparte información con terceros  
+
+✅ Se reduce el riesgo de filtraciones
 
 ---
 
-# 4. Responsabilidad
+## Cumplimiento de privacidad
 
-El agente no debe reemplazar a profesionales de salud.
+Este enfoque ayuda a cumplir con buenas prácticas y normas de privacidad en sistemas de salud mental porque protege información altamente confidencial.
 
-Es una herramienta de apoyo para clasificación inicial.
+Además se recomienda:
+
+- Control de acceso
+- Cifrado de datos
+- Auditorías de seguridad
+- Almacenamiento seguro
+
+---
+
+# 4. Costos y acceso equitativo
+
+Muchos sistemas de IA dependen de APIs pagas como:
+
+- :contentReference[oaicite:5]{index=5}  
+- :contentReference[oaicite:6]{index=6}  
+
+Esto puede generar costos elevados para hospitales o instituciones pequeñas.
+
+---
+
+## Ventaja ética de Ollama
+
+Con **:contentReference[oaicite:7]{index=7}**:
+
+✅ No hay costo por uso de API  
+
+✅ No existen pagos por cantidad de consultas  
+
+✅ Mayor accesibilidad para instituciones con pocos recursos  
+
+✅ Democratiza el acceso a IA en salud
+
+---
+
+# 5. Responsabilidad
 
 Si ocurre un error:
 
-- La institución debe supervisar su implementación
 - Los desarrolladores deben mantener el sistema
+- La institución debe supervisar su implementación
 - Los profesionales deben validar decisiones críticas
 
----
-
-## Responsabilidad compartida
-
-### Desarrolladores
-Responsables de diseñar correctamente el sistema y minimizar errores.
-
-### Institución médica
-Responsable de implementar protocolos adecuados.
-
-### Profesionales de salud
-Responsables de la decisión final sobre el paciente.
+La responsabilidad es compartida.
 
 ---
 
 # Conclusión
 
-La inteligencia artificial puede ayudar a mejorar procesos en salud mental, pero debe utilizarse de manera responsable.
+El proyecto evolucionó desde un sistema simple basado en reglas hacia una solución más avanzada utilizando IA local con **** y el modelo :contentReference[oaicite:9]{index=9}.
 
-Este proyecto demuestra una aplicación inicial sencilla mediante reglas en Python, pero reconoce que cualquier evolución hacia modelos más avanzados como Ollama requerirá mayores controles éticos, técnicos y humanos.
+Esto mejora:
 
-La tecnología debe complementar al profesional, nunca reemplazarlo.
+- Interpretación de lenguaje natural
+- Privacidad de datos
+- Reducción de costos
+- Accesibilidad tecnológica
+
+Sin embargo, sigue siendo una herramienta de apoyo y nunca debe reemplazar la evaluación de profesionales de salud mental.
