@@ -1,0 +1,6 @@
+Paciente,Consulta,Prioridad,Derivacion,Tiempo
+Paciente A,"Hace una semana que no duermo, estoy muy nervioso",MEDIA,Ambulatorio,24hs
+Paciente B,Necesito cambiar mi turno del martes,BAJA,Consultorio,72hs
+Paciente C,"Anoche tomé 20 pastillas, no sé qué hacer",ALTA,Guardia,inmediato
+Paciente D,Escucho voces que me dicen que me lastime,ALTA,Guardia,inmediato
+Paciente E,Quería pedir la receta de mi medicación,BAJA,Consultorio,72hs

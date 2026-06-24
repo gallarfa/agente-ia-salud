@@ -1,233 +1,132 @@
-# 🧠 Agente Inteligente de Clasificación de Urgencias en Salud Mental
+# 🧠 Agente Inteligente de Clasificación de Urgencias (Triage) en Salud Mental
 
-## 📌 Descripción del Proyecto
-
-Este proyecto consiste en un agente desarrollado en Python que analiza el motivo de consulta de pacientes dentro de un sistema de salud mental y clasifica automáticamente el nivel de urgencia del caso.
-
-El sistema asigna una prioridad:
-
-- 🔴 ALTA
-- 🟡 MEDIA
-- 🟢 BAJA
-
-El objetivo es ayudar al personal de salud a priorizar rápidamente casos críticos y mejorar los tiempos de respuesta.
+**Materia:** Inteligencia Artificial Aplicada al Desarrollo de Software  
+**Estudiante:** Gallardo Fernando Andrés  
+**Carrera:** 3° año de Analista de Sistemas  
+**Profesora:** Miriam Elena Coronel  
+**Instituto:** Instituto Superior Combate de Mbororé  
+**Fecha:** Junio de 2026  
 
 ---
 
-# ❗ Problema que resuelve
+## 📌 Descripción General del Proyecto
 
-En centros de salud mental pueden ingresar múltiples consultas al mismo tiempo y muchas veces no existe una clasificación automática inicial.
+Este proyecto consiste en una solución de software inteligente en Python diseñada para optimizar los procesos de admisión y triage en centros y hospitales de salud mental. El sistema analiza los textos o motivos de consulta ingresados por los pacientes (o sus acompañantes) y clasifica automáticamente la prioridad de atención en tres niveles de urgencia clínica:
 
-Este sistema ayuda a:
-
-- Detectar casos urgentes rápidamente
-- Reducir tiempos de espera
-- Optimizar recursos
-- Asistir al personal administrativo
-- Mejorar la atención inicial al paciente
+- 🔴 **ALTA:** Casos con riesgo inminente de vida, ideaciones activas de autolesión/suicidio, delirios severos, agresiones incontroladas o brotes psicóticos agudos.
+- 🟡 **MEDIA:** Crisis agudas pero estables, episodios de pánico severos, llanto desmedido recurrente, angustia invalidante o problemas de consumos problemáticos sin sobredosis.
+- 🟢 **BAJA:** Consultas netamente administrativas como pedido y renovación de recetas médicas, consultas o cambios de turnos, y trámites generales.
 
 ---
 
-# 🚀 Versiones del Proyecto
+## ❗ Problema Clínico que Resuelve
 
-Actualmente el proyecto cuenta con **dos versiones diferentes**:
+En las salas de espera y mesas de entradas de salud mental, la recepción física o digital suele congestionarse. Un administrativo sin conocimientos clínicos puede demorar la detección de una crisis de autolesión inminente por estar procesando pedidos rutinarios de recetas o turnos.
 
----
-
-## 1️⃣ `agente.py` → Versión básica
-
-Esta versión utiliza reglas simples mediante palabras clave.
-
-Ejemplo:
-
-- suicidio
-- autolesión
-- ansiedad
-- estrés
-- depresión
-
-Según las palabras encontradas, clasifica el caso como:
-
-- Alta
-- Media
-- Baja
-
-### Ventajas
-
-✅ Fácil de desarrollar  
-✅ Rápido de ejecutar  
-✅ No requiere librerías externas  
-✅ Ideal para entender la lógica inicial
-
-### Desventajas
-
-❌ Limitado a palabras exactas  
-❌ Puede fallar con frases complejas  
-❌ Menor capacidad de interpretación
+Este sistema asiste al personal en la pre-clasificación, logrando:
+1. **Detección inmediata:** Identificación instantánea de discursos clínicos graves.
+2. **Priorización de guardia:** Desvío inmediato de casos 🔴 a la guardia médica especializada.
+3. **Eficiencia administrativa:** Automatización de la derivación de trámites programados 🟢.
+4. **Privacidad garantizada:** Seguridad legal de la información del paciente al procesar todo de manera local.
 
 ---
 
-## 2️⃣ `agente_ollama.py` → Versión avanzada con IA local
+## 🚀 Arquitectura y Versiones del Sistema
 
-Esta versión utiliza **Ollama** ejecutando el modelo **Llama 3.2** de forma local para interpretar mejor el contexto del mensaje del paciente.
+El proyecto cuenta con dos enfoques de desarrollo para demostrar la evolución de un sistema de software tradicional hacia la integración de Inteligencia Artificial:
 
-Ejemplo:
+### 1️⃣ Agente por Reglas Rígidas (`agente.py`)
+Utiliza una lógica de programación clásica estructurada en Python basada en búsquedas condicionales de palabras clave e incorporación de sinónimos dialectales locales (ej. *"bajón"*, *"crisis"*, *"pastillas"*).
+- **Ventajas:** Extremadamente rápido, cero consumo de hardware, no requiere conexión externa ni librerías adicionales.
+- **Desventajas:** Vulnerable a falsos negativos si el paciente expresa su dolor de forma indirecta sin utilizar palabras clave explícitas (ej. *"no quiero despertar mañana"*).
 
-El paciente escribe:
-
-*"No quiero seguir viviendo, estoy cansado de todo."*
-
-Aunque no use la palabra exacta "suicidio", el modelo puede interpretar que se trata de un caso crítico.
-
----
-
-# ✅ Ventajas de usar Ollama
-
-### 🔒 Mayor privacidad
-
-Los datos se procesan localmente en la computadora o servidor.
-
-No se envían datos sensibles de pacientes a servicios externos.
-
-:contentReference[oaicite:0]{index=0}
+### 2️⃣ Agente IA Semántico Local (`agente_ollama.py`)
+Utiliza la API HTTP local de **Ollama** para comunicarse con el modelo de lenguaje de gran tamaño **Llama 3.2** de Meta (3 mil millones de parámetros), procesando toda la información semántica en lenguaje natural dentro del propio hardware local de la institución.
+- **Ventajas:** Comprensión profunda del contexto y lenguaje figurado, flexibilidad ante sinónimos y modismos, y explicación razonada de la prioridad.
+- **Desventajas:** Requiere mayor capacidad de cómputo (CPU/GPU) y la instalación local de Ollama.
 
 ---
 
-### 🌐 No necesita internet
+## ⚙️ Características Destacadas de la Nueva Versión
 
-Una vez descargado el modelo:
-
-- Puede funcionar offline
-- Ideal para hospitales o centros con conectividad limitada
-
----
-
-### 💰 Costo cero
-
-No requiere pagar APIs externas como:
-
-- :contentReference[oaicite:1]{index=1}  
-- :contentReference[oaicite:2]{index=2}  
-
-El modelo funciona localmente sin costos por uso.
+El sistema ha sido mejorado significativamente, incorporando:
+- **Consola Interactiva:** Menú interactivo para ejecutar lotes de prueba preestablecidos o evaluar consultas personalizadas escritas en tiempo real por teclado.
+- **Triage Clínico Manchester Adaptado:** El System Prompt ha sido refinado con criterios formales y objetivos de evaluación psiquiátrica.
+- **Parser Robustecido de JSON:** Limpieza y reparación de respuestas mediante expresiones regulares de Python para evitar fallas ante errores de sintaxis del modelo.
+- **Generador de Reportes HTML:** Exportación automática de un dashboard gráfico web interactivo (`reporte_triage.html`) que resume la estadística del lote analizado mediante tarjetas de colores y listas organizadas de pacientes.
+- **Exportación CSV:** Ambos agentes exportan sus clasificaciones a archivos CSV estructurados (`resultados.csv` y `resultados_ollama.csv`) para permitir auditorías posteriores del equipo de salud humana.
 
 ---
 
-### 🧠 Mejor comprensión del lenguaje natural
+## 💻 Requisitos del Sistema
 
-Puede interpretar frases complejas, indirectas o ambiguas mejor que el sistema basado únicamente en palabras clave.
+- **Python 3.8 o superior**
+- **Librería de Requests** (instalable mediante `pip install requests`)
+- **Ollama** (para la ejecución local del agente semántico avanzado)
+- **Modelo Llama 3.2** (descargable localmente)
 
 ---
 
-# ⚙️ Instalación
+## 🛠️ Guía de Instalación y Configuración
 
-Requisitos:
+### Paso 1: Clonar el Proyecto
+Descarga el proyecto en tu entorno local.
 
-- Python 3.x
-- Ollama (solo para versión avanzada)
-
-Verificar Python:
-
+### Paso 2: Instalar Dependencias de Python
+Instala las dependencias necesarias indicadas en `requirements.txt` ejecutando en tu consola:
 ```bash
-python --version
+pip install -r requirements.txt
 ```
 
-Instalar Ollama:
-
-:contentReference[oaicite:3]{index=3}
-
-Descargar modelo Llama 3.2:
-
-```bash
-ollama pull llama3.2
-```
+### Paso 3: Instalar Ollama
+1. Descarga e instala Ollama en tu sistema operativo desde [ollama.com](https://ollama.com).
+2. Abre tu terminal y descarga el modelo Llama 3.2:
+   ```bash
+   ollama pull llama3.2
+   ```
+3. Asegúrate de tener Ollama ejecutándose en segundo plano (puedes verificarlo levantando la terminal e ingresando `ollama serve`).
 
 ---
 
-# ▶️ Ejecución
+## ▶️ Instrucciones de Ejecución
 
-## Versión básica
-
-```bash
-py agente.py
-```
-
-o
-
+### Ejecución del Agente por Reglas
+En tu terminal de comandos, dirígete a la carpeta del proyecto y ejecuta:
 ```bash
 python agente.py
 ```
 
----
-
-## Versión avanzada con Ollama
-
-```bash
-py agente_ollama.py
-```
-
-o
-
+### Ejecución del Agente con Ollama (IA Local)
+Asegúrate de que Ollama está activo y ejecuta en tu terminal:
 ```bash
 python agente_ollama.py
 ```
 
 ---
 
-# 💻 Ejemplo de salida
+## 📊 Ejemplo de Funcionamiento y Resultados de Salida
 
-```bash
-Motivo de consulta:
-"Paciente presenta intento de autolesión"
+### Entrada del Paciente:
+> *"Estoy muy nervioso, me late rápido el corazón y me cuesta respirar."*
 
-Resultado:
-🔴 PRIORIDAD ALTA
+### Salida del Agente Ollama (JSON Procesado):
+```json
+{
+  "prioridad": "MEDIA",
+  "justificacion": "El paciente presenta sintomatología compatible con un cuadro agudo de ansiedad o crisis de pánico (taquicardia, disnea) sin indicios inminentes de autolesión."
+}
 ```
 
-```bash
-Motivo de consulta:
-"Paciente tiene ansiedad por trabajo"
-
-Resultado:
-🟡 PRIORIDAD MEDIA
-```
-
-```bash
-Motivo de consulta:
-"Paciente desea iniciar terapia"
-
-Resultado:
-🟢 PRIORIDAD BAJA
-```
+- **Derivación recomendada:** Consultorio de Urgencia Ambulatoria / Psiquiatría.
+- **Plazo máximo:** Dentro de las 24 horas.
+- **Emoji visual en consola:** 🟡
 
 ---
 
-# 🛠️ Tecnologías utilizadas
+## 📂 Contenido del Proyecto (`FINAL/`)
 
-- Python
-- Inteligencia Artificial
-- Procesamiento de texto
-- Reglas condicionales
-- Ollama
-- :contentReference[oaicite:4]{index=4} Llama 3.2
-- Git
-- GitHub
-
----
-
-# 📚 Contexto académico
-
-Proyecto desarrollado para la carrera de **Analista de Sistemas**, aplicando conceptos de:
-
-- Inteligencia Artificial
-- Ética en IA
-- Automatización
-- Sistemas de información
-- Desarrollo de software
-
----
-
-# 👨‍💻 Autor
-
-**Fernando Gallardo**  
-Estudiante de Analista de Sistemas
+- `agente.py`: Script del agente clasificador basado en reglas rígidas y condicionales.
+- `agente_ollama.py`: Script del agente avanzado que integra Ollama local y genera reportes HTML/CSV.
+- `informe_etica.md`: Documento de análisis ético, mitigación de sesgos, privacidad de datos y marco legal de Argentina.
+- `requirements.txt`: Archivo de configuración de dependencias de Python.
+- `README.md`: Este archivo instructivo de documentación del proyecto.

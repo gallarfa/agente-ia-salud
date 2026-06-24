@@ -1,0 +1,25 @@
+Ejemplo 🔴 URGENCIA ALTA (Para lucirte con la IA)
+Qué escribir:
+
+"Estoy muy cansado de todo, ya no quiero seguir viviendo y no le encuentro sentido a seguir acá."
+
+Por qué es brillante mostrar esto:
+Si pasaras esta consulta por el agente de reglas básico (agente.py), daría BAJA 🟢 porque no contiene palabras exactas como "suicidio" o "pastillas".
+El agente de Ollama (agente_ollama.py) entenderá el significado profundo de la frase (ideación suicida) y lo clasificará correctamente como ALTA 🔴, derivándolo a Guardia de forma inmediata.
+
+Ejemplo 🟡 URGENCIA MEDIA (Crisis de ansiedad o pánico)
+Qué escribir:
+
+"Siento que me falta el aire, me late muy rápido el corazón y no me puedo calmar, tengo mucho miedo."
+
+Por qué mostrarlo:
+No usa la palabra exacta "ansiedad" o "pánico", pero la IA deduce que el paciente está sufriendo una crisis de pánico/angustia y lo clasificará como MEDIA 🟡 (derivación ambulatoria dentro de las 24hs).
+
+
+Ejemplo 🟢 URGENCIA BAJA (Trámite administrativo)
+Qué escribir:
+
+"Hola, quería preguntar si me pueden pasar el número de teléfono del consultorio del Dr. Martínez."
+
+Por qué mostrarlo:
+Es una consulta puramente administrativa. La IA identificará que no hay riesgo ni malestar psicológico severo y lo clasificará como BAJA 🟢 (tiempo de espera de 72hs).

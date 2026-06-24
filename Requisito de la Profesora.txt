@@ -1,0 +1,26 @@
+Requisito de la Profesora	    Cómo lo cumple tu proyecto               	Archivos involucrados
+
+1. Integración Real de IA	
+El script avanzado no es una simulación; se comunica por HTTP con la API de Ollama y ejecuta en tiempo real el modelo Llama 3.2 de Meta.	
+agente_ollama.py
+
+2. Agente Autónomo Mínimo	
+El agente toma las consultas de entrada y decide de forma 100% autónoma (mediante lógica de programación y entendimiento de lenguaje natural) la prioridad de triage sin requerir intervención humana.	
+agente.py
+ y 
+agente_ollama.py
+
+3. Documentación Completa
+Tienes un archivo estructurado que explica el problema, el funcionamiento del software, los requisitos técnicos, las instrucciones de instalación y ejemplos prácticos de salida.	
+README.md
+
+4. Informe de Ética e Impacto
+Analiza detalladamente los sesgos del sistema de reglas frente al semántico, el peligro de alucinaciones (y cómo se mitigan en el código bajando la temperatura a 0.3), la privacidad de los datos médicos y la responsabilidad humana compartida.	
+informe_etica.md
+
+5. Control de Versiones en GitHub
+Tienes tu repositorio público en GitHub (agente-ia-salud) con un historial de commits que demuestra el desarrollo incremental.	
+Repositorio GitHub
+
+6. Uso de Ollama Local	Evita la dependencia de APIs pagas (como OpenAI) y protege los datos sensibles de salud procesando todo localmente en tu hardware mediante Ollama.	
+agente_ollama.py
